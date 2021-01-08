@@ -10,7 +10,12 @@ Network main components:
 Sender
 Receiver
 Exchange Message
+Data Store
+Exchange Token (Cypto)
+Permissions
 
 We are propsing to exchange data via asymmetric encryption. The sender and reciever identities are concealed via address similar to crypto wallets addresses.
 
 The parties of the network can exchange data either via network or P2P. We never decrypt or see the data sent no matter what type.
+
+Anyone can signup for the network to have their data stored no matter what their type either individual or 
