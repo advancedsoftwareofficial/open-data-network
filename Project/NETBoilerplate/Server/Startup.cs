@@ -47,7 +47,7 @@ namespace NETBoilerplate.Server
             services.AddRazorPages();
             services.AddOData();
             SetOutputFormatters(services);
-            services.AddTransient<IContentService, ContentService>();
+            services.AddTransient<IUserService, UserService>();
             var appSettingsSection = Configuration.GetSection("Auth");
             services.Configure<Auth>(appSettingsSection);
             var key = Encoding.ASCII.GetBytes(appSettingsSection["Secret"]);
@@ -115,7 +115,7 @@ namespace NETBoilerplate.Server
         private static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Content>("Content");
+            builder.EntitySet<User>("Users");
             return builder.GetEdmModel();
         }
         private static void SetOutputFormatters(IServiceCollection services)
