@@ -1,4 +1,5 @@
-﻿using AdvancedSoftware.DataAccess.Entity;
+﻿using System.Collections.Generic;
+using AdvancedSoftware.DataAccess.Entity;
 using NETBoilerplate.Shared.Enums;
 
 namespace NETBoilerplate.Shared.Entity
@@ -10,5 +11,6 @@ namespace NETBoilerplate.Shared.Entity
         public UserType UserType { get; set; }
         public string APIKey { get; set; }
         public string WalletAddress { get; set; }
+        public IList<DataPool> DataPools { get; set; }
     }
 }

@@ -19,7 +19,11 @@ namespace NETBoilerplate.DataAccess.Database
         {
             base.OnModelCreating(builder);
             builder.Entity<User>().ToTable("Users").HasKey(y => y.Id);
-            builder.Entity<User>().Property(y => y.Timestamp).IsConcurrencyToken();
+            builder.Entity<User>().Property(y => y.Timestamp).IsConcurrencyToken(); 
+            builder.Entity<DataPool>().ToTable("DataPools").HasKey(y => y.Id);
+            builder.Entity<DataPool>().Property(y => y.Timestamp).IsConcurrencyToken();
+            builder.Entity<DataPoolStorage>().ToTable("DataPoolStorages").HasKey(y => y.Id);
+            builder.Entity<DataPoolStorage>().Property(y => y.Timestamp).IsConcurrencyToken();
         }
     }
 }
