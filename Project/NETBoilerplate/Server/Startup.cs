@@ -108,7 +108,7 @@ namespace NETBoilerplate.Server
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/ODN/swagger/v1/swagger.json", "My API V1");
             });
         }
 
@@ -122,19 +122,13 @@ namespace NETBoilerplate.Server
         {
             services.AddMvcCore(options =>
             {
-                IEnumerable<ODataOutputFormatter> outputFormatters =
-                    options.OutputFormatters.OfType<ODataOutputFormatter>()
-                        .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
-                IEnumerable<ODataInputFormatter> inputFormatters =
-                   options.OutputFormatters.OfType<ODataInputFormatter>()
-                       .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
-                foreach (var outputFormatter in outputFormatters)
+                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
                 {
-                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
                 }
-                foreach (var inputFormatter in inputFormatters)
+                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
                 {
-                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
                 }
             });
         }
