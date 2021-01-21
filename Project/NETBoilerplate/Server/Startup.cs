@@ -48,6 +48,7 @@ namespace NETBoilerplate.Server
             services.AddOData();
             SetOutputFormatters(services);
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IDataPoolStorageService, DataPoolStorageService>();
             var appSettingsSection = Configuration.GetSection("Auth");
             services.Configure<Auth>(appSettingsSection);
             var key = Encoding.ASCII.GetBytes(appSettingsSection["Secret"]);
