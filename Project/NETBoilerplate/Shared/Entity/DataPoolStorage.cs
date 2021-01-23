@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using AdvancedSoftware.DataAccess.Entity;
 
 namespace NETBoilerplate.Shared.Entity
