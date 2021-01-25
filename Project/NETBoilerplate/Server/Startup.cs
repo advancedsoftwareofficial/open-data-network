@@ -9,18 +9,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OData.Edm;
 using Microsoft.OpenApi.Models;
+using NETBoilerplate.DataAccess.Database;
+using NETBoilerplate.DataAccess.Service;
 using NETBoilerplate.Server.Model;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Net.Http.Headers;
-using System.Text;
-using Newtonsoft.Json;
 using NETBoilerplate.Shared.Entity;
 using NETBoilerplate.Shared.Service;
-using NETBoilerplate.DataAccess.Service;
-using NETBoilerplate.DataAccess.Database;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Text;
 
 namespace NETBoilerplate.Server
 {
