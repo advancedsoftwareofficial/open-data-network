@@ -20,6 +20,7 @@ using NETBoilerplate.Shared.Service;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Hosting.Server;
 
 namespace NETBoilerplate.Server
 {

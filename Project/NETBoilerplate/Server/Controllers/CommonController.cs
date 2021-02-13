@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace NETBoilerplate.Server.Controllers
 {
-    [Authorize]
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
