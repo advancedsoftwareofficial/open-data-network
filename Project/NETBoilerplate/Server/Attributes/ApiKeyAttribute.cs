@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace NETBoilerplate.Server.Attributes
 {
+    //Source: http://codingsonata.com/secure-asp-net-core-web-api-using-api-key-authentication/
     [AttributeUsage(AttributeTargets.Class)]
     public class ApiKeyAttribute : Attribute, IAsyncActionFilter
     {
