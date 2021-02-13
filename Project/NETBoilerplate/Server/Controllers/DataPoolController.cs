@@ -4,8 +4,7 @@ using NETBoilerplate.Shared.Service;
 
 namespace NETBoilerplate.Server.Controllers
 {
-    [ApiKey]
-    public class DataPoolController: CommonController<DataPool>
+    public class DataPoolController: CommonApiController<DataPool>
     {
         private readonly IDataPoolService _dataPoolService;
         public DataPoolController(IDataPoolService dataPoolService) : base(dataPoolService)
