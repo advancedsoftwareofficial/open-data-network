@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NETBoilerplate.DataAccess",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODN.Package", "ODN.Package\ODN.Package.csproj", "{939597BC-ADD7-423B-A495-B60E1ADAEABC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODN.Package.Test", "ODN.Package.Test\ODN.Package.Test.csproj", "{D85DC389-1391-428F-BBBA-2DB7DEB9DEF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{939597BC-ADD7-423B-A495-B60E1ADAEABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{939597BC-ADD7-423B-A495-B60E1ADAEABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{939597BC-ADD7-423B-A495-B60E1ADAEABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D85DC389-1391-428F-BBBA-2DB7DEB9DEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85DC389-1391-428F-BBBA-2DB7DEB9DEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D85DC389-1391-428F-BBBA-2DB7DEB9DEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D85DC389-1391-428F-BBBA-2DB7DEB9DEF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

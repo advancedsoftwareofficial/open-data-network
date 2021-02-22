@@ -2,6 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>ODN.SDK</PackageId>
+        <Title>Open Data Network NuGet Package</Title>
+        <Authors>Advanced Software</Authors>
     </PropertyGroup>
 
     <ItemGroup>

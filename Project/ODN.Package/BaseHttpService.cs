@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Microsoft.Extensions.Options;
@@ -13,7 +15,12 @@ namespace ODN.Package
         {
             _appSettings = appSettings.CurrentValue;
         }
-        public async Task<TResponse> Get<TResponse>(string controller, string apiPrefix, string token)
+
+        public BaseHttpService(AppSettings appSettings)
+        {
+            _appSettings = appSettings;
+        }
+        public async Task<TResponse> Get<TResponse>(string controller, string apiPrefix, Dictionary<string,string> headers = null,string oauth = null)
         {
             string baseUrl = _appSettings.RESTAddress;
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -21,7 +28,7 @@ namespace ODN.Package
 
             try
             {
-                var data = await $"{baseUrl}/{apiPrefix}/{controller}".WithOAuthBearerToken(token).GetAsync().ReceiveJson<TResponse>();
+                var data = await $"{baseUrl}/{apiPrefix}/{controller}".WithHeaders(headers).WithOAuthBearerToken(oauth).GetAsync().ReceiveJson<TResponse>();
                 stopwatch.Stop();
                 Debug.WriteLine($"GET Request finished - Time:{stopwatch.ElapsedMilliseconds}");
                 return data;
@@ -43,17 +50,27 @@ namespace ODN.Package
             Debug.WriteLine($"Elapsed Time - {stopwatch.Elapsed}");
             return result;
         }
-        public async Task<TResponse> Put<TRequest, TResponse>(TRequest entity, string controller, string apiPrefix, string token)
+        public async Task<TResponse> Put<TRequest, TResponse>(TRequest entity, string controller, string apiPrefix,Dictionary<string,string> headers = null,string oauth = null)
         {
             string baseUrl = _appSettings.RESTAddress;
-            var result = await $"{baseUrl}/{apiPrefix}/{controller}".WithOAuthBearerToken(token).PutJsonAsync(entity).ReceiveJson<TResponse>();
+            var result = await $"{baseUrl}/{apiPrefix}/{controller}".WithHeaders(headers).WithOAuthBearerToken(oauth).PutJsonAsync(entity).ReceiveJson<TResponse>();
             return result;
         }
-        public async Task<bool> Delete(string controller, string apiPrefix, string token)
+        public async Task<bool> Delete(string controller, string apiPrefix, Dictionary<string,string> headers = null,string oauth = null)
         {
             string baseUrl = _appSettings.RESTAddress;
-            var result = await $"{baseUrl}/{apiPrefix}/{controller}".WithOAuthBearerToken(token).DeleteAsync();
+            var result = await $"{baseUrl}/{apiPrefix}/{controller}".WithHeaders(headers).WithOAuthBearerToken(oauth).DeleteAsync();
             return await Task.FromResult(true);
+        }
+        public async Task<TResponse> Post<TRequest, TResponse>(TRequest entity, string controller, string apiPrefix,Dictionary<string,string> headers = null,string oauth = null)
+        {
+            string baseUrl = _appSettings.RESTAddress;
+            Debug.WriteLine($"Request initiated - Address: {baseUrl} Target {controller}");
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            var result = await $"{baseUrl}/{apiPrefix}/{controller}".WithHeaders(headers).WithOAuthBearerToken(oauth).PostJsonAsync(entity).ReceiveJson<TResponse>();
+            stopwatch.Stop();
+            Debug.WriteLine($"Elapsed Time - {stopwatch.Elapsed}");
+            return result;
         }
     }
 }

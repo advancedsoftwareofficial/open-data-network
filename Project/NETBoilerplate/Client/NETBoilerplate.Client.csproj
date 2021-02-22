@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ODN.Package\ODN.Package.csproj" />
     <ProjectReference Include="..\Shared\NETBoilerplate.Shared.csproj" />
   </ItemGroup>
 
