@@ -33,7 +33,8 @@ namespace ODN.Package.Test
             IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
-            var result = await service.Delete(6);
+            var items = await GetItems();
+            var result = await service.Delete(items[0].Id);
             Assert.True(result);
         }
 
@@ -43,10 +44,10 @@ namespace ODN.Package.Test
             IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
-            var data = new DataPoolStorage();
-            data.Id = 5;
-            data.DataPoolId = 1;
-            data.Data = JsonConvert.SerializeObject(new Product {Name = "Keyboard", Price = 13.2M});
+            var items = await GetItems();
+            var data =items[0];
+            data.DataHash = "anr";
+            data.Data = JsonConvert.SerializeObject(new Product {Name = "Updated via Unit Tests", Price = 13.2M});
             var result = await service.Update(data);
 
         }
@@ -54,11 +55,16 @@ namespace ODN.Package.Test
         [Fact]
         public async Task Get()
         {
+            var items = await GetItems();
+            Assert.True(items.Count > 0);
+        }
+
+        public async Task<List<DataPoolStorage>> GetItems()
+        {
             IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
-            var items = await service.OdataQuery<List<DataPoolStorage>>("?$filter=DataPoolId eq 1&$orderby=id desc");
-            Assert.True(items.Count > 0);
+            return await service.OdataQuery<List<DataPoolStorage>>("?$filter=DataPoolId eq 1&$orderby=id desc");
         }
     }
     
