@@ -1,5 +1,4 @@
-﻿using NETBoilerplate.Server.Attributes;
-using NETBoilerplate.Shared.Entity;
+﻿using NETBoilerplate.Shared.Entity;
 using NETBoilerplate.Shared.Service;
 
 namespace NETBoilerplate.Server.Controllers
