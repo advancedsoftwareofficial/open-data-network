@@ -3,11 +3,7 @@ using ODN.Package.Entity;
 
 namespace ODN.Package.Definitions
 {
-    public interface IDataPoolStorageService
+    public interface IDataPoolStorageService : IBaseODNService<DataPoolStorage>
     {
-        Task<DataPoolStorage> Add(DataPoolStorage item);
-        Task<bool> Delete(int rowId);
-        Task<T> OdataQuery<T>(string query);
-        Task<DataPoolStorage> Update(DataPoolStorage item);
     }
 }

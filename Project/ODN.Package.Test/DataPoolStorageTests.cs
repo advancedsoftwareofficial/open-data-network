@@ -16,7 +16,7 @@ namespace ODN.Package.Test
         [Fact]
         public async Task Add()
         {
-            IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
+            IDataPoolStorageService service = new DataPoolStorageService(new ODNSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
             var result = await  service.Add(new Entity.DataPoolStorage()
@@ -30,7 +30,7 @@ namespace ODN.Package.Test
         [Fact]
         public async Task Delete()
         {
-            IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
+            IDataPoolStorageService service = new DataPoolStorageService(new ODNSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
             var items = await GetItems();
@@ -41,7 +41,7 @@ namespace ODN.Package.Test
         [Fact]
         public async Task Update()
         {
-            IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
+            IDataPoolStorageService service = new DataPoolStorageService(new ODNSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
             var items = await GetItems();
@@ -61,7 +61,7 @@ namespace ODN.Package.Test
 
         public async Task<List<DataPoolStorage>> GetItems()
         {
-            IDataPoolStorageService service = new DataPoolStorageService(new AppSettings()
+            IDataPoolStorageService service = new DataPoolStorageService(new ODNSettings()
                 {RESTAddress = "https://odn.azurewebsites.net", ApiKey = "34DA933321CD615E3748FE5A811E2F03"}
             );
             return await service.OdataQuery<List<DataPoolStorage>>("?$filter=DataPoolId eq 1&$orderby=id desc");
