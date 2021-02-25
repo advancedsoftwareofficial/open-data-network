@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Hosting.Server;
+using Serilog;
 
 namespace NETBoilerplate.Server
 {
@@ -74,6 +75,10 @@ namespace NETBoilerplate.Server
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+            services.AddSingleton<Serilog.ILogger>(x=>
+            {
+                return new LoggerConfiguration().WriteTo.MSSqlServer(Configuration["ConnectionStrings:DefaultConnection"], Configuration["Serilog:TableName"],autoCreateSqlTable:true).CreateLogger();
             });
         }
 

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 
 namespace NETBoilerplate.Server
 {
@@ -13,7 +15,30 @@ namespace NETBoilerplate.Server
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var sinkOpts = new MSSqlServerSinkOptions();
+            sinkOpts.TableName = "Logs";
+            var columnOpts = new ColumnOptions();
+            columnOpts.Store.Remove(StandardColumn.Properties);
+            columnOpts.Store.Add(StandardColumn.LogEvent);
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.MSSqlServer(connectionString:"",
+                    sinkOptions:sinkOpts)
+                .CreateLogger();
+ 
+            try
+            {
+                Log.Information("Starting Web Host");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -29,6 +54,6 @@ namespace NETBoilerplate.Server
                 {
                     webBuilder.UseStartup<Startup>();
                     
-                });
+                }).UseSerilog();
     }
 }

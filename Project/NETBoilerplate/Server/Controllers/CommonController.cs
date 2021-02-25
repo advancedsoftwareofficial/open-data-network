@@ -5,6 +5,7 @@ using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace NETBoilerplate.Server.Controllers
 {
@@ -14,16 +15,18 @@ namespace NETBoilerplate.Server.Controllers
     public class CommonController<T> : Controller where T : class, IEntityBase
     {
         private readonly IService<T> _service;
-
-        public CommonController(IService<T> service)
+        private readonly ILogger<CommonController<T>> _logger;
+        public CommonController(IService<T> service,ILogger<CommonController<T>> logger)
         {
             _service = service;
+            _logger = logger;
         }
         [HttpGet]
         [EnableQuery]
         [ODataRoute()]
         public IActionResult Get()
         {
+            _logger.Log(LogLevel.Debug,"TEst log");
             return Ok(_service.AsDbSet());
         }
         [HttpGet("{key}")]
